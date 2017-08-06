@@ -12,8 +12,12 @@ Delay read_sensors(1000 * 2); // ms
 PinPower power(7);
 
 // The sensors to sample data from.
-MoistureSensor sensors[] { A0, A1 };
-const int kNumSensors = sizeof(sensors) / sizeof(MoistureSensor);
+static MoistureSensor s1(A0);
+static MoistureSensor s2(A1);
+Sensor* sensors[] {
+  &s1, &s2
+};
+const int kNumSensors = sizeof(sensors) / sizeof(Sensor);
 
 void setup() {
   Serial.begin(9600);
@@ -36,12 +40,15 @@ void loop() {
   // After a short delay since powering the pin, read from
   // the sensors.
   if (power.IsOn()) {
-    Serial.println("Moisture:");
+    Serial.println("Sensor Readings:");
     for (auto i = 0; i < kNumSensors; ++i) {
+      auto sensor = sensors[i];
       Serial.print("> Sensor #");
       Serial.print(i + 1);
+      Serial.print(" ");
+      Serial.print(sensor->type());
       Serial.print(": ");
-      Serial.println(sensors[i].Read());
+      Serial.println(sensor->Read());
     }
     Serial.println("*****");
     power.Off();
