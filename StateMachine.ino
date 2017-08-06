@@ -38,7 +38,7 @@ private:
 
 
 // A digital out power handler. After turning it On() then after a short delay
-// IsOn() will return true. This ensures that the ping had had enough time to
+// IsOn() will return true. This ensures that the pin have had enough time to
 // power up whatever it's driving.
 class PinPower {
 public:
@@ -107,6 +107,9 @@ void setup() {
   Serial.begin(9600);
   read_sensors.Start();
   // TODO(thomthom): Read sensors upon startup?
+  // Instead of starting the timer, set read_sensor to a true state.
+  // That way the loop should read the sensors as soon as they have
+  // had time to make some readings.
 }
 
 void loop() {
