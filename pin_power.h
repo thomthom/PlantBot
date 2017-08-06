@@ -24,7 +24,6 @@ public:
     delay_.Stop();
   }
 
-  // TODO(thomthom): Add a boolean operator that return this?
   bool IsOn() const {
     return static_cast<bool>(delay_);
   }
