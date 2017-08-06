@@ -21,11 +21,11 @@ const int kNumSensors = sizeof(sensors) / sizeof(Sensor);
 
 void setup() {
   Serial.begin(9600);
+  // Power on during startup for an initial reading. Otherwise there will be
+  // a longer lag before data appear.
+  power.On();
+  // Start the timer that controls the interval for reading from the sensors.
   read_sensors.Start();
-  // TODO(thomthom): Read sensors upon startup?
-  // Instead of starting the timer, set read_sensor to a true state.
-  // That way the loop should read the sensors as soon as they have
-  // had time to make some readings.
 }
 
 void loop() {
