@@ -42,13 +42,13 @@ void loop() {
   if (power.IsOn()) {
     Serial.println("Sensor Readings:");
     for (auto i = 0; i < kNumSensors; ++i) {
-      auto sensor = sensors[i];
+      Sensor& sensor = *sensors[i];
       Serial.print("> Sensor #");
       Serial.print(i + 1);
       Serial.print(" ");
-      Serial.print(sensor->type());
+      Serial.print(sensor.type());
       Serial.print(": ");
-      Serial.println(sensor->Read());
+      Serial.println(sensor.Read());
     }
     Serial.println("*****");
     power.Off();
